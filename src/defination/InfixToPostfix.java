@@ -73,7 +73,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public boolean isOperator(char ch) {
-        return OPERATORS.indexOf(ch) != 1;
+        return OPERATORS.indexOf(ch) != -1;
     }
 
     @Override
