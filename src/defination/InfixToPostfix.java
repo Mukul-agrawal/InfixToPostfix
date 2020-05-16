@@ -39,6 +39,6 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public String getPostfix() {
-        return null;
+        return postfix.toString();
     }
 }
