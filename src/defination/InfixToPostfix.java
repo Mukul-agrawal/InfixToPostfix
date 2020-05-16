@@ -11,7 +11,6 @@ public class InfixToPostfix implements InfixToPostfixADT {
     private final Deque<Character> operatorStack = new ArrayDeque<>();
     private final String OPERATORS = "+-*/^()";
     private final int[] PRECEDENCE = {1, 1, 2, 2, 3, -1, -1};
-    private final String PATTERN = "\\d+\\.\\d*|\\d+|" + "\\p{L}[\\p{L}\\p{N}]*" + "|[" + OPERATORS + "]";
     private StringJoiner postfix = new StringJoiner(" ");
 
     public String convert(String infix) throws SyntaxErrorException {
@@ -37,6 +36,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
             }
             while (!operatorStack.isEmpty()) {
                 char op = operatorStack.pop();
+                if (op == '(') throw new SyntaxErrorException("Unmatched opening parenthesis");
                 postfix.add(Character.toString(op));
             }
         } catch (NoSuchElementException e) {
@@ -48,7 +48,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public void processOperator(char op) {
-        if (operatorStack.isEmpty()) {
+        if (operatorStack.isEmpty() || op == '(') {
             operatorStack.push(op);
         } else {
 
@@ -60,14 +60,17 @@ public class InfixToPostfix implements InfixToPostfixADT {
                 while (!operatorStack.isEmpty() && precedence(op) <=
                         precedence(topOp)) {
                     operatorStack.pop();
+                    if (topOp == '(') {
+                        break;
+                    }
                     postfix.add(Character.toString(topOp));
                     if (!operatorStack.isEmpty()) {
-
                         topOp = operatorStack.peek();
                     }
                 }
-
-                operatorStack.push(op);
+                if (op != ')') {
+                    operatorStack.push(op);
+                }
             }
         }
     }
