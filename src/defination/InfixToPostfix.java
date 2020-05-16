@@ -2,7 +2,11 @@ package defination;
 
 import adt.InfixToPostfixADT;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class InfixToPostfix implements InfixToPostfixADT {
+    private final Deque<Character> operatorStack = new ArrayDeque<>();
     @Override
     public void convertToPostfix(String infix) {
 
