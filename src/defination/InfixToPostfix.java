@@ -29,8 +29,9 @@ public class InfixToPostfix implements InfixToPostfixADT {
                     postfix.add(nextToken);
                 } else if (isOperator(firstChar)) {
                     processOperator(firstChar);
+                } else {
+                    throw new SyntaxErrorException("Unexpected Character Encountered: " + firstChar);
                 }
-
             }
         } catch (Exception e) {
 
@@ -56,5 +57,11 @@ public class InfixToPostfix implements InfixToPostfixADT {
     @Override
     public String getPostfix() {
         return postfix.toString();
+    }
+
+    public static class SyntaxErrorException extends Exception {
+        SyntaxErrorException(String message) {
+            super(message);
+        }
     }
 }
