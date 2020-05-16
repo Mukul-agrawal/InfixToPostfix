@@ -34,7 +34,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public int precedence(char op) {
-        return 0;
+        return PRECEDENCE[OPERATORS.indexOf(op)];
     }
 
     @Override
