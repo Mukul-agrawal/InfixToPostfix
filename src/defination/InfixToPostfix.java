@@ -33,6 +33,10 @@ public class InfixToPostfix implements InfixToPostfixADT {
                     throw new SyntaxErrorException("Unexpected Character Encountered: " + firstChar);
                 }
             }
+            while (!operatorStack.isEmpty()) {
+                char op = operatorStack.pop();
+                postfix.add(Character.toString(op));
+            }
         } catch (Exception e) {
 
         }
