@@ -29,7 +29,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public boolean isOperator(char ch) {
-        return false;
+        return OPERATORS.indexOf(ch) != 1;
     }
 
     @Override
