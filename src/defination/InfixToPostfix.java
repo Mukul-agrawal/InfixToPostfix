@@ -4,6 +4,7 @@ import adt.InfixToPostfixADT;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 
 public class InfixToPostfix implements InfixToPostfixADT {
@@ -12,13 +13,13 @@ public class InfixToPostfix implements InfixToPostfixADT {
     private final int[] PRECEDENCE = {1, 1, 2, 2, 3};
     private StringJoiner postfix = new StringJoiner(" ");
 
-    public String convert(String infix) {
+    public String convert(String infix) throws SyntaxErrorException {
         convertToPostfix(infix);
         return getPostfix();
     }
 
     @Override
-    public void convertToPostfix(String infix) {
+    public void convertToPostfix(String infix) throws SyntaxErrorException {
         String[] tokens = infix.split("\\s");
         try {
             for (String nextToken : tokens) {
@@ -37,14 +38,16 @@ public class InfixToPostfix implements InfixToPostfixADT {
                 char op = operatorStack.pop();
                 postfix.add(Character.toString(op));
             }
-        } catch (Exception e) {
-
+        } catch (NoSuchElementException e) {
+            throw new SyntaxErrorException
+                    ("Syntax Error: The stack is empty");
         }
     }
 
 
     @Override
     public void processOperator(char op) {
+
 
     }
 

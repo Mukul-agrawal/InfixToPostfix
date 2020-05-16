@@ -1,7 +1,9 @@
 package adt;
 
+import defination.InfixToPostfix;
+
 public interface InfixToPostfixADT {
-    void convertToPostfix(String infix);
+    void convertToPostfix(String infix) throws InfixToPostfix.SyntaxErrorException;
 
     void processOperator(char op);
 
