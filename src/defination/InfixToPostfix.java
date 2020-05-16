@@ -28,7 +28,7 @@ public class InfixToPostfix implements InfixToPostfixADT {
                         || Character.isDigit(firstChar)) {
                     postfix.add(nextToken);
                 } else if (isOperator(firstChar)) {
-
+                    processOperator(firstChar);
                 }
 
             }
