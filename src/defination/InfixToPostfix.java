@@ -21,13 +21,20 @@ public class InfixToPostfix implements InfixToPostfixADT {
     public void convertToPostfix(String infix) {
         String[] tokens = infix.split("\\s");
         try {
+            for (String nextToken : tokens) {
+                char firstChar = nextToken.charAt(0);
 
+                if (Character.isJavaIdentifierStart(firstChar)
+                        || Character.isDigit(firstChar)) {
+                    postfix.add(nextToken);
+                }
 
+            }
         } catch (Exception e) {
 
         }
-
     }
+
 
     @Override
     public void processOperator(char op) {
