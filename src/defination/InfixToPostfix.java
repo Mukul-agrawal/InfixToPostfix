@@ -7,6 +7,7 @@ import java.util.Deque;
 
 public class InfixToPostfix implements InfixToPostfixADT {
     private final Deque<Character> operatorStack = new ArrayDeque<>();
+    private final String OPERATORS = "+-*/^";
     @Override
     public void convertToPostfix(String infix) {
 
