@@ -11,6 +11,12 @@ public class InfixToPostfix implements InfixToPostfixADT {
     private final String OPERATORS = "+-*/^";
     private final int[] PRECEDENCE = {1, 1, 2, 2, 3};
     private StringJoiner postfix = new StringJoiner(" ");
+
+    public String convert(String infix) {
+        convertToPostfix(infix);
+        return getPostfix();
+    }
+
     @Override
     public void convertToPostfix(String infix) {
 
