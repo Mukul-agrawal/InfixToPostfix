@@ -47,8 +47,28 @@ public class InfixToPostfix implements InfixToPostfixADT {
 
     @Override
     public void processOperator(char op) {
+        if (operatorStack.isEmpty()) {
+            operatorStack.push(op);
+        } else {
 
+            char topOp = operatorStack.peek();
+            if (precedence(op) > precedence(topOp)) {
+                operatorStack.push(op);
+            } else {
 
+                while (!operatorStack.isEmpty() && precedence(op) <=
+                        precedence(topOp)) {
+                    operatorStack.pop();
+                    postfix.add(Character.toString(topOp));
+                    if (!operatorStack.isEmpty()) {
+
+                        topOp = operatorStack.peek();
+                    }
+                }
+
+                operatorStack.push(op);
+            }
+        }
     }
 
     @Override
