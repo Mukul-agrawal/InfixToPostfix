@@ -20,6 +20,12 @@ public class InfixToPostfix implements InfixToPostfixADT {
     @Override
     public void convertToPostfix(String infix) {
         String[] tokens = infix.split("\\s");
+        try {
+
+
+        } catch (Exception e) {
+
+        }
 
     }
 
